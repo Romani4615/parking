@@ -12,10 +12,6 @@ class Garage:
             self.parkingspaces[x] = 0
 #dictionary^
 
-    def taketicket(self):
-        pass
-    def ticketcount(self):
-        pass
 #methods\/
     def enter(self):
         self.ticket += 1
@@ -27,11 +23,10 @@ class Garage:
 
 ##Key value statement
     def __next_free_space(self):
-        """Finds the first available parking space in the dictionary"""
-        for parking_spot, occupied in self.parkingspaces.items():
-            if occupied == 0:
-                return parking_spot
-
+        """Finds the first available parking space in the dictionary""" #iterating through the key/values of the parking space dictionary
+        for parking_spot, occupied in self.parkingspaces.items():  #for key, value in dictionary(bc i wrote items, we basically opened up the dictionary)
+            if occupied == 0:     #calling on value IF IT'S NOT FILLED WITH A TICKET(SPOT) 
+                return parking_spot #THEN WE RETURN THE KEY TO 0 BC THE VALUE IS ZERO/EMPTY/NOTFILLED 
     def show(self):
         input(f'Here is all the availibe spots: {self.parkingspaces}\n press any key to continue')
         
