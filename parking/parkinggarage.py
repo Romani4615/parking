@@ -1,7 +1,9 @@
 
 #blueprint
+#object
 class Garage:
     def __init__(self):
+        #attributes
         self.ticket = 0
         self.paymentstatus = {}
         self.numspaces = 15
@@ -14,13 +16,13 @@ class Garage:
         pass
     def ticketcount(self):
         pass
-
+#methods\/
     def enter(self):
         self.ticket += 1
         self.paymentstatus[self.ticket] = False
         parkingspace = self.__next_free_space()  #keynumb from dict
         self.parkingspaces[parkingspace] = self.ticket
-        print(f"You've been issured ticket number {self.ticket} for parking space number {parkingspace}")
+        print(f"You've been issued ticket number {self.ticket} for parking space number {parkingspace}")
 
 
 ##Key value statement
@@ -30,37 +32,52 @@ class Garage:
             if occupied == 0:
                 return parking_spot
 
+    def show(self):
+        input(f'Here is all the availibe spots: {self.parkingspaces}\n press any key to continue')
+        
 
     def exit(self):
-         if (welcome == 'exit'):
-            if ticket >=15:
-               print('garage is empty')
+        if self.paymentstatus[self.ticket] == False:
+            print("please comeback when you've paid!")
+            self.paynow()
                    
-            else:
-                returnticket = self.ticket
-                self.parkingspaces += 1
-                print('spaces left: ' + (ticket))
+        else:
+            returnticket = self.ticket
+            self.parkingspaces += 1 
+            print('spaces left: ' + (self.ticket))
         
     def quit(self):
-        print('bye')
+        if self.paymentstatus[self.ticket] == False:
+            print('YOU CAN NEVER LEAVE.. without paying')
+            self.paynow()
 
-
+    def paynow(self):
+        input('Thanks for coming you owe: $15, please enter: pay to fulfill the transaction ').lower()
+        print("Have a swell day")
+        self.paymentstatus[self.ticket] = True
 
 #actual object
 parkingg = Garage()
 
-
+#driver code
 while True:
-    user_input = input("Thanks for choosing J%A&M's garage, please pick from the following: enter/exit or quit ").lower()
+    user_input = input("Thanks for choosing A&M's garage, please pick from the following: enter/exit/show or quit ").lower()
     if user_input == 'enter':
         parkingg.enter()
         continue
-    if user_input == 'exit':
+    elif user_input == 'exit':
         parkingg.exit()
-        continue
-    if user_input == 'quit':
+        break
+    elif user_input == 'quit':
         parkingg.quit()
         break
+    elif user_input == 'show':
+        parkingg.show()
+    elif user_input == 'pay':
+        parkingg.paynow()
+        continue
+
+
     else:
         print("invalid input, try harder")
         continue
